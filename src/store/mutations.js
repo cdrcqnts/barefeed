@@ -13,7 +13,13 @@ export const mutations = {
     [types.SET_ERR](state, payload) {
         state.err = payload
     },
-    [types.CLEAR_ERR](state) {
+    [types.RESET_ERR](state) {
         state.err = ""
-    }
+    },
+    [types.PODCAST_DLG_ON](state) {
+        state.podcastDlg = true
+    },
+    [types.PODCAST_DLG_OFF](state) {
+        state.podcastDlg = false
+    },
 };

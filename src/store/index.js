@@ -8,6 +8,7 @@ Vue.use(Vuex);
 const state = {
     feeds: [],
     err: "",
+    podcastDlg: false,
 };
 
 export default new Vuex.Store({

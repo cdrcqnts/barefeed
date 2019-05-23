@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-content>
-            <ErrMsg></ErrMsg>
+<!--            <ErrMsg></ErrMsg>-->
             <v-container fill-height fluid>
                 <v-layout align-center justify-center>
 
@@ -13,14 +13,22 @@
                             podcasts.</h2>
                         <br>
                         <v-text-field
+                                :error-messages="err"
+                                :loading="loading"
+                                @keyup.enter.native="addFeed()"
                                 hint="For example, http://blablatada.rss"
                                 label="Enter your first feed URL"
-                                value=""
+                                v-model="url"
                         ></v-text-field>
                         <br>
                         <v-flex text-xs-center>
-                            <v-btn @click="addFirstFeed" class="align-center" color="primary" depressed large>Get this
-                                feed
+                            <v-btn :disabled="loading || !url.length > 0"
+                                   @click="addFeed()"
+                                   class="align-center"
+                                   color="primary"
+                                   depressed
+                                   large>
+                                Get this feed
                             </v-btn>
                         </v-flex>
                     </v-flex>
@@ -31,23 +39,38 @@
 </template>
 
 <script>
-    import ErrMsg from './ErrMsg'
+    import API_POST from '@/services/API_POST'
+    import {mapActions, mapState} from 'vuex'
 
     export default {
-        name: "First",
-        components: {ErrMsg},
         data: () => ({
             drawer: null,
+            loading: false,
+            url: "",
         }),
-        props: {
-            source: String
-        },
-        mounted() {
-
-        },
+        computed: mapState(['feeds', 'err']),
         methods: {
-            addFirstFeed() {
-                // call
+            ...mapActions([
+                'addFeed',
+                'resetErr',
+                'setErr',
+            ]),
+            async addFeed() {
+                this.loading = true;
+                let sid = "";
+                if (this.err.length > 0) {
+                    this.resetErr();
+                }
+                const res = await API_POST.feed(sid, this.url);
+                if (res.ok) {
+                    let sid = res.data.sid;
+                    this.addFeed(res.data);
+                    this.loading = false;
+                    this.$router.push({name: 'notFirstFeed', params: {sid: sid}});
+                } else {
+                    this.setErr(res.data);
+                    this.loading = false
+                }
             }
         }
     }

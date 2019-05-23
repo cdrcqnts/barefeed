@@ -3,8 +3,7 @@ import Vue from 'vue'
 import './plugins/vuetify'
 import VueRouter from 'vue-router'
 import store from './store'
-import API_GET from '@/services/API_GET.js'
-import time from '@/aux/time.js'
+
 
 import App from './App.vue'
 
@@ -28,9 +27,9 @@ const routes = [{
     name: 'notFirstFeed',
     path: '/:sid',
     component: NotFirstFeed,
-    beforeEnter: (to, from, next) => {
-        loadFeeds(to, from, next)
-    },
+    // beforeEnter: (to, from, next) => {
+    //     loadFeeds(to, from, next)
+    // },
 }
 ];
 
@@ -49,13 +48,3 @@ new Vue({
 }).$mount('#app');
 
 
-async function loadFeeds(to, from, next) {
-    let sid = to.params.sid
-    const res = await API_GET.feeds(sid)
-    if (res.ok) {
-        let feeds = time.sortByUpdated(res.data)
-        store.dispatch('initFeeds', feeds).then(next())
-    } else {
-        store.dispatch('setErr', res.data).then(router.push({name: 'firstFeed'}))
-    }
-}

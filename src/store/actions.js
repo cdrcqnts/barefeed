@@ -16,6 +16,14 @@ export const setErr = ({commit}, msg) => {
     commit(types.SET_ERR, msg)
 };
 
-export const clearErr = ({commit}) => {
-    commit(types.CLEAR_ERR)
+export const resetErr = ({commit}) => {
+    commit(types.RESET_ERR)
+};
+
+export const podcastDlgOn = ({commit}) => {
+    commit(types.PODCAST_DLG_ON)
+};
+
+export const podcastDlgOff = ({commit}) => {
+    commit(types.PODCAST_DLG_OFF)
 };
