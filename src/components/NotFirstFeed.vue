@@ -21,7 +21,7 @@
                 v-model="drawer"
         >
             <v-list dense>
-<!--                <RefreshFeeds></RefreshFeeds>-->
+                <!--                <RefreshFeeds></RefreshFeeds>-->
                 <DlgFeedAdd></DlgFeedAdd>
                 <v-subheader class=" grey--text text--darken-1">YOUR CHANNELS</v-subheader>
                 <v-list-tile :class="getActiveClass(idx, currIdx)"
@@ -30,6 +30,7 @@
                              v-for="(feed, idx) in feeds">
                     <v-list-tile-content>
                         <v-list-tile-title class="grey--text text--darken-3">{{feed.title}}</v-list-tile-title>
+                        <v-list-tile-sub-title>{{updated(feed.updated)}}</v-list-tile-sub-title>
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
@@ -46,8 +47,6 @@
                 <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
                 <span class="hidden-sm-and-down">{{ feeds[currIdx].title }}</span>
             </v-toolbar-title>
-
-
             <v-text-field
                     class="hidden-sm-and-down"
                     flat
@@ -84,10 +83,11 @@
                     <template v-slot:items="props">
                         <td class="text-xs-left">{{ props.item.title }}</td>
                         <td class="text-xs-right">{{ props.item.duration }}</td>
+                        <td class="text-xs-right">{{ size(props.item.size) }}</td>
                         <td class="text-xs-right">{{ released(props.item.released) }}</td>
                         <td class="justify-center layout px-0">
                             <v-btn @click="dialogPodcast(props.item)" icon>
-                                <v-icon color="grey darken-2">info</v-icon>
+                                <v-icon color="grey">info</v-icon>
                             </v-btn>
                             <v-btn :href="props.item.url" icon target="_blank">
                                 <v-icon color="grey darken-2">get_app</v-icon>
@@ -103,9 +103,9 @@
             </v-card>
             <DlgPodcastDetail :podcast="podcast"></DlgPodcastDetail>
         </v-content>
-        <v-footer dark app class="justify-center" color="primary" inset justify-center>
-            <v-btn flat small>View project on  Github
-<!--                <img alt="View on Github" height="18" src="../assets/githubWhite.png" width="18">-->
+        <v-footer app class="justify-center" color="primary" dark inset justify-center>
+            <v-btn flat small>View project on Github
+                <!-- <img alt="View on Github" height="18" src="../assets/githubWhite.png" width="18">-->
             </v-btn>
         </v-footer>
     </v-app>
@@ -121,6 +121,7 @@
 
     import API_GET from '@/services/API_GET'
     import time from '@/aux/time'
+    import filesize from '@/aux/filesize'
     import {mapActions, mapState} from 'vuex'
 
     export default {
@@ -151,6 +152,11 @@
                     text: 'Duration',
                     align: 'right',
                     value: 'duration'
+                },
+                {
+                    text: 'Size',
+                    align: 'right',
+                    value: 'size',
                 },
                 {
                     text: 'Released',
@@ -218,6 +224,12 @@
             },
             released(t) {
                 return time.convDate(t)
+            },
+            updated(t) {
+                return "updated " + time.convUpdTime(t)
+            },
+            size(n) {
+              return filesize.formatBytes(n, 2)
             },
             dialogPodcast(podcast) {
                 this.podcast = Object.assign({}, podcast);
