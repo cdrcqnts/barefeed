@@ -13,9 +13,10 @@
                             podcasts.</h2>
                         <br>
                         <v-text-field
+                                :disabled="loading"
                                 :error-messages="err"
                                 :loading="loading"
-                                @keyup.enter.native="addFeed()"
+                                @keyup.enter.native="addNewFeed()"
                                 hint="For example, http://blablatada.rss"
                                 label="Enter your first feed URL"
                                 v-model="url"
@@ -23,7 +24,7 @@
                         <br>
                         <v-flex text-xs-center>
                             <v-btn :disabled="loading || !url.length > 0"
-                                   @click="addFeed()"
+                                   @click="addNewFeed()"
                                    class="align-center"
                                    color="primary"
                                    depressed
@@ -55,7 +56,7 @@
                 'resetErr',
                 'setErr',
             ]),
-            async addFeed() {
+            async addNewFeed() {
                 this.loading = true;
                 let sid = "";
                 if (this.err.length > 0) {

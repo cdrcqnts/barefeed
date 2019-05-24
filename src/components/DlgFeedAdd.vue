@@ -17,7 +17,8 @@
                             :error-messages="err"
                             :loading="loading"
                             @keyup.enter.native="addFeed()"
-                            label="Enter Podcast URL"
+                            hint="For example, http://blablatada.rss"
+                            label="Enter feed URL"
                             v-model="url"
                     >
                     </v-text-field>
@@ -25,8 +26,8 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn @click="cancel" color="blue darken-1" flat>Cancel</v-btn>
-                <v-btn :disabled="loading || !url.length > 0" @click="addFeed()" color="blue darken-1" flat>Save
+                <v-btn @click="cancel" color="primary" flat>Cancel</v-btn>
+                <v-btn :disabled="loading || !url.length > 0" @click="addFeed()" color="primary" flat>Save
                 </v-btn>
             </v-card-actions>
         </v-card>

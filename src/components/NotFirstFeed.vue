@@ -21,9 +21,9 @@
                 v-model="drawer"
         >
             <v-list dense>
-                <RefreshFeeds></RefreshFeeds>
+<!--                <RefreshFeeds></RefreshFeeds>-->
                 <DlgFeedAdd></DlgFeedAdd>
-                <v-subheader class=" grey--text text--darken-1">YOUR FEEDS</v-subheader>
+                <v-subheader class=" grey--text text--darken-1">YOUR CHANNELS</v-subheader>
                 <v-list-tile :class="getActiveClass(idx, currIdx)"
                              :key="feed.title"
                              @click="currIdx = idx"
@@ -34,24 +34,47 @@
                 </v-list-tile>
             </v-list>
         </v-navigation-drawer>
-        <v-toolbar app clipped-left color="indigo" dark dense fixed flat>
-            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>{{ feeds[currIdx].title }}</v-toolbar-title>
-            <v-spacer></v-spacer>
+        <v-toolbar
+                :clipped-left="$vuetify.breakpoint.mdAndUp"
+                app
+                color="blue darken-3"
+                dark
+                fixed
+                flat
+        >
+            <v-toolbar-title class="ml-0 pl-3" style="width: 500px">
+                <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+                <span class="hidden-sm-and-down">{{ feeds[currIdx].title }}</span>
+            </v-toolbar-title>
+
+
+            <v-text-field
+                    class="hidden-sm-and-down"
+                    flat
+                    label="Search"
+                    prepend-icon="search"
+                    solo-inverted
+                    v-model="search"
+            ></v-text-field>
             <v-spacer></v-spacer>
             <DlgFeedDetail :idx="currIdx"></DlgFeedDetail>
             <DlgFeedDelete :idx="currIdx"></DlgFeedDelete>
         </v-toolbar>
         <v-content>
             <v-card>
-                <v-card-title>
-                    <v-spacer></v-spacer>
-                    <v-spacer></v-spacer>
-                    <v-text-field append-icon="search" hide-details label="Search" single-line
-                                  v-model="search"></v-text-field>
+                <v-card-title class="hidden-md-and-up">
+                    <v-text-field
+                            append-icon="search"
+                            flat
+                            hide-details
+                            label="Search"
+                            single-line
+                            v-model="search"
+                    ></v-text-field>
                 </v-card-title>
                 <v-data-table :headers="headers"
                               :items="feeds[currIdx].podcasts"
+                              :loading="loadingTbl"
                               :must-sort="true"
                               :pagination.sync="pagination"
                               :rows-per-page-items="rowsPerPage"
@@ -80,16 +103,17 @@
             </v-card>
             <DlgPodcastDetail :podcast="podcast"></DlgPodcastDetail>
         </v-content>
-        <v-footer app color="indigo justify-center" inset justify-center>
-            <span class="white--text">&copy; 2019</span>
+        <v-footer dark app class="justify-center" color="primary" inset justify-center>
+            <v-btn flat small>View project on  Github
+<!--                <img alt="View on Github" height="18" src="../assets/githubWhite.png" width="18">-->
+            </v-btn>
         </v-footer>
-
     </v-app>
 </template>
 
 <script>
     //import ErrMsg from './ErrMsg'
-    import RefreshFeeds from './RefreshFeeds'
+    //import RefreshFeeds from './RefreshFeeds'
     import DlgFeedDelete from './DlgFeedDelete'
     import DlgFeedDetail from './DlgFeedDetail'
     import DlgFeedAdd from './DlgFeedAdd'
@@ -102,7 +126,7 @@
     export default {
         components: {
             //ErrMsg,
-            RefreshFeeds,
+            //RefreshFeeds,
             DlgFeedDelete,
             DlgFeedDetail,
             DlgFeedAdd,
@@ -113,6 +137,7 @@
             source: "String",
             currIdx: 0,
             loading: true,
+            loadingTbl: false,
             search: '',
             podcast: {},
             headers: [

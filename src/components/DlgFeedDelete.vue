@@ -1,5 +1,5 @@
 <template>
-    <v-dialog max-width="600" v-model="show">
+    <v-dialog max-width="400" v-model="show">
         <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">
                 <v-icon>delete_outline</v-icon>
