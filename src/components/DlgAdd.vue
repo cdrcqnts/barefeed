@@ -14,13 +14,13 @@
             <v-card-text>
                 <v-container grid-list-md>
                     <v-text-field
-                            :autofocus="true"
+
                             :error-messages="err"
                             :loading="loading"
                             @keyup.enter.native="addFeed()"
                             hint="For example, http://blablatada.rss"
                             label="Enter feed URL"
-                            v-model="url"
+                            v-model.trim="url"
                     >
                     </v-text-field>
                 </v-container>

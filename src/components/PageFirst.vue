@@ -13,13 +13,14 @@
                             podcasts.</h2>
                         <br>
                         <v-text-field
+                                :autofocus="true"
                                 :disabled="loading"
                                 :error-messages="err"
                                 :loading="loading"
                                 @keyup.enter.native="addNewFeed()"
                                 hint="For example, http://blablatada.rss"
                                 label="Enter your first feed URL"
-                                v-model="url"
+                                v-model.trim="url"
                         ></v-text-field>
                         <br>
                         <v-flex text-xs-center>
@@ -54,7 +55,9 @@
             loading: false,
             url: "",
         }),
-        computed: mapState(['feeds', 'err']),
+        computed: {
+            ...mapState(['feeds', 'err']),
+        },
         methods: {
             ...mapActions([
                 'addFeed',

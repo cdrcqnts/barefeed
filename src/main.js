@@ -10,8 +10,8 @@ import App from './App.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
-import FirstFeed from './components/FirstFeed.vue'
-import NotFirstFeed from './components/NotFirstFeed.vue'
+import FirstFeed from './components/PageFirst.vue'
+import NotFirstFeed from './components/PageMain.vue'
 
 
 Vue.use(VueRouter);
