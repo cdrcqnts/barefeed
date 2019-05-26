@@ -34,7 +34,6 @@
     import {mapState} from 'vuex';
 
     export default {
-        name: "DlgFeedDetail",
         props: ['idx'],
         data: function () {
             return {

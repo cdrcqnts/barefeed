@@ -1,5 +1,5 @@
 <template>
-    <v-dialog max-width="600" v-model="podcastDlg">
+    <v-dialog max-width="600" v-model="podcastDlg" persistent>
         <v-card>
             <v-card-title primary-title>
                 <div>
@@ -7,14 +7,15 @@
                     </div>
                     <span class="grey--text">released on {{ timeReleased(podcast.released) }}</span>
                     <br>
+                    <br>
                     <div> {{ podcast.description }}</div>
                     <br>
                 </div>
             </v-card-title>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn :href="podcast.url" @click="podcastDlgOff" color="primary" depressed>
-                    Download
+                <v-btn :href="podcast.url" target="_blank" @click="podcastDlgOff" color="success" depressed>
+                    Download Podcast
                     <v-icon dark right>get_app</v-icon>
                 </v-btn>
                 <v-btn @click="podcastDlgOff" color="blue darken-1" flat>Close</v-btn>

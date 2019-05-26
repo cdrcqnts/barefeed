@@ -1,12 +1,12 @@
 <template>
     <v-app>
         <v-content>
-<!--            <ErrMsg></ErrMsg>-->
+            <!--            <ErrMsg></ErrMsg>-->
             <v-container fill-height fluid>
                 <v-layout align-center justify-center>
 
                     <v-flex md4 sm8 xs12>
-                        <h1 class="text-xs-center">This is Barefeed
+                        <h1 class="text-xs-center">Barefeed
                             <v-icon large>rss_feed</v-icon>
                         </h1>
                         <h2 class="subheading text-xs-center">A simple registration-free feed reader for
@@ -36,14 +36,19 @@
                 </v-layout>
             </v-container>
         </v-content>
+        <Footer></Footer>
     </v-app>
 </template>
 
 <script>
+    import Footer from './Footer'
     import API_POST from '@/services/API_POST'
     import {mapActions, mapState} from 'vuex'
 
     export default {
+        components: {
+            Footer,
+        },
         data: () => ({
             drawer: null,
             loading: false,

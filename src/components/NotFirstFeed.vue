@@ -20,9 +20,9 @@
                 fixed
                 v-model="drawer"
         >
-            <v-list dense>
+            <v-list subheader two-line>
                 <!--                <RefreshFeeds></RefreshFeeds>-->
-                <DlgFeedAdd></DlgFeedAdd>
+                <DlgAdd></DlgAdd>
                 <v-subheader class=" grey--text text--darken-1">YOUR CHANNELS</v-subheader>
                 <v-list-tile :class="getActiveClass(idx, currIdx)"
                              :key="feed.title"
@@ -56,8 +56,8 @@
                     v-model="search"
             ></v-text-field>
             <v-spacer></v-spacer>
-            <DlgFeedDetail :idx="currIdx"></DlgFeedDetail>
-            <DlgFeedDelete :idx="currIdx"></DlgFeedDelete>
+            <DlgFeed :idx="currIdx"></DlgFeed>
+            <DlgDelete :idx="currIdx"></DlgDelete>
         </v-toolbar>
         <v-content>
             <v-card>
@@ -101,23 +101,19 @@
                     </template>
                 </v-data-table>
             </v-card>
-            <DlgPodcastDetail :podcast="podcast"></DlgPodcastDetail>
+            <DlgPodcast :podcast="podcast"></DlgPodcast>
         </v-content>
-        <v-footer app class="justify-center" color="primary" dark inset justify-center>
-            <v-btn flat small>View project on Github
-                <!-- <img alt="View on Github" height="18" src="../assets/githubWhite.png" width="18">-->
-            </v-btn>
-        </v-footer>
+
+
     </v-app>
 </template>
 
 <script>
-    //import ErrMsg from './ErrMsg'
-    //import RefreshFeeds from './RefreshFeeds'
-    import DlgFeedDelete from './DlgFeedDelete'
-    import DlgFeedDetail from './DlgFeedDetail'
-    import DlgFeedAdd from './DlgFeedAdd'
-    import DlgPodcastDetail from './DlgPodcastDetail'
+
+    import DlgDelete from './DlgDelete'
+    import DlgFeed from './DlgFeed'
+    import DlgAdd from './DlgAdd'
+    import DlgPodcast from './DlgPodcast'
 
     import API_GET from '@/services/API_GET'
     import time from '@/aux/time'
@@ -126,12 +122,10 @@
 
     export default {
         components: {
-            //ErrMsg,
-            //RefreshFeeds,
-            DlgFeedDelete,
-            DlgFeedDetail,
-            DlgFeedAdd,
-            DlgPodcastDetail
+            DlgDelete,
+            DlgFeed,
+            DlgAdd,
+            DlgPodcast
         },
         data: () => ({
             drawer: null,
@@ -229,7 +223,7 @@
                 return "updated " + time.convUpdTime(t)
             },
             size(n) {
-              return filesize.formatBytes(n, 2)
+                return filesize.formatBytes(n, 2)
             },
             dialogPodcast(podcast) {
                 this.podcast = Object.assign({}, podcast);

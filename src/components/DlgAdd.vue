@@ -14,6 +14,7 @@
             <v-card-text>
                 <v-container grid-list-md>
                     <v-text-field
+                            :autofocus="true"
                             :error-messages="err"
                             :loading="loading"
                             @keyup.enter.native="addFeed()"
@@ -39,7 +40,6 @@
     import {mapState} from 'vuex';
 
     export default {
-        name: "DlgFeedNew",
         data: function () {
             return {
                 show: false,

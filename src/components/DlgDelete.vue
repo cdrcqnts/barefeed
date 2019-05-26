@@ -24,7 +24,6 @@
     import {mapActions, mapState} from 'vuex'
 
     export default {
-        name: "DlgFeedDelete",
         props: ['idx'],
         data: function () {
             return {
