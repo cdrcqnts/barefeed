@@ -1,0 +1,17 @@
+export const STR = Object.freeze({
+    PAGE_TITLE: "Barefeed",
+    PAGE_SUBTITLE: "A simple slot-based feed reader.",
+    URL_HINT: "For example: https://rss.art19.com/masters-of-scale",
+    URL_LABEL: "Enter feed URL",
+    URL_LABEL_FIRST: "Enter your first feed URL",
+    BTN_ADD_FEED: "Add Feed",
+    BTN_ADD_YES: "Save",
+    BTN_ADD_NO: "Cancel",
+    BTN_DELETE_NO: "No, keep",
+    BTN_DELETE_YES: "Yes, delete",
+    BTN_CLOSE: "Close",
+    BTN_DOWNLOAD: "Download Podcast",
+    SEARCH: "Search this channel",
+    NO_DATA: "Sorry, nothing to display here :(",
+    CHANNELS: "Your Channels",
+});

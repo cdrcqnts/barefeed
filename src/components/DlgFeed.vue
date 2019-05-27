@@ -23,7 +23,7 @@
             </v-card-title>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn @click="show = false" color="blue darken-1" flat>Close</v-btn>
+                <v-btn @click="show = false" color="blue darken-1" flat>{{ str.close }}</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -32,12 +32,16 @@
 <script>
     import time from '@/aux/time'
     import {mapState} from 'vuex';
+    import {STR} from '@/aux/constants.js'
 
     export default {
         props: ['idx'],
         data: function () {
             return {
                 show: false,
+                str: {
+                    close: STR.BTN_CLOSE,
+                }
             }
         },
         computed: {

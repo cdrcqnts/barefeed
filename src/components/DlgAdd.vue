@@ -6,7 +6,7 @@
                     <v-icon color="grey darken-3">add_circle_outline</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                    <v-list-tile-title class="grey--text text--darken-3">Add Feed</v-list-tile-title>
+                    <v-list-tile-title class="grey--text text--darken-3">{{ str.add }}</v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
         </template>
@@ -18,8 +18,8 @@
                             :error-messages="err"
                             :loading="loading"
                             @keyup.enter.native="addFeed()"
-                            hint="For example, http://blablatada.rss"
-                            label="Enter feed URL"
+                            :hint="str.hintUrl"
+                            :label="str.labelUrl"
                             v-model.trim="url"
                     >
                     </v-text-field>
@@ -27,8 +27,8 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn @click="cancel" color="primary" flat>Cancel</v-btn>
-                <v-btn :disabled="loading || !url.length > 0" @click="addFeed()" color="primary" flat>Save
+                <v-btn @click="cancel" color="primary" flat>{{str.no}}</v-btn>
+                <v-btn :disabled="loading || !url.length > 0" @click="addFeed()" color="primary" flat>{{ str.yes }}
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -37,6 +37,7 @@
 
 <script>
     import API_POST from '@/services/API_POST.js'
+    import {STR} from '@/aux/constants.js'
     import {mapState} from 'vuex';
 
     export default {
@@ -45,6 +46,13 @@
                 show: false,
                 loading: false,
                 url: "",
+                str: {
+                    hintUrl: STR.URL_HINT,
+                    labelUrl: STR.URL_LABEL,
+                    add: STR.BTN_ADD_FEED,
+                    no: STR.BTN_ADD_NO,
+                    yes: STR.BTN_ADD_YES,
+                }
             }
         },
         computed: mapState(['err']),

@@ -10,9 +10,9 @@
             <v-card-text class="red--text">{{ err }}</v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn @click="cancel" color="green darken-1" flat>No, keep</v-btn>
-                <v-btn :disabled="loading" :loading="loading" @click="deleteFeed(idx)" color="red darken-1" flat>Yes,
-                    delete
+                <v-btn @click="cancel" color="green darken-1" flat>{{ str.no }}</v-btn>
+                <v-btn :disabled="loading" :loading="loading" @click="deleteFeed(idx)" color="red darken-1" flat>
+                    {{ str.yes }}
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -22,6 +22,7 @@
 <script>
     import API_DELETE from '@/services/API_DELETE.js'
     import {mapActions, mapState} from 'vuex'
+    import {STR} from '@/aux/constants.js'
 
     export default {
         props: ['idx'],
@@ -29,6 +30,10 @@
             return {
                 show: false,
                 loading: false,
+                str: {
+                    no: STR.BTN_DELETE_NO,
+                    yes: STR.BTN_DELETE_YES,
+                }
             }
         },
         computed: mapState(['feeds', 'err']),

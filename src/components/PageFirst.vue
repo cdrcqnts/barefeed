@@ -6,11 +6,10 @@
                 <v-layout align-center justify-center>
 
                     <v-flex md4 sm8 xs12>
-                        <h1 class="text-xs-center">Barefeed
+                        <h1 class="text-xs-center">{{ txt.title }}
                             <v-icon large>rss_feed</v-icon>
                         </h1>
-                        <h2 class="subheading text-xs-center">A simple registration-free feed reader for
-                            podcasts.</h2>
+                        <h2 class="subheading text-xs-center">{{ txt.subtitle }}</h2>
                         <br>
                         <v-text-field
                                 :autofocus="true"
@@ -18,8 +17,8 @@
                                 :error-messages="err"
                                 :loading="loading"
                                 @keyup.enter.native="addNewFeed()"
-                                hint="For example, http://blablatada.rss"
-                                label="Enter your first feed URL"
+                                :hint="txt.hintUrl"
+                                :label="txt.labelUrl"
                                 v-model.trim="url"
                         ></v-text-field>
                         <br>
@@ -45,6 +44,7 @@
     import Footer from './Footer'
     import API_POST from '@/services/API_POST'
     import {mapActions, mapState} from 'vuex'
+    import {STR} from '@/aux/constants.js'
 
     export default {
         components: {
@@ -54,6 +54,12 @@
             drawer: null,
             loading: false,
             url: "",
+            txt: {
+                title: STR.PAGE_TITLE,
+                subtitle: STR.PAGE_SUBTITLE,
+                hintUrl: STR.URL_HINT,
+                labelUrl: STR.URL_LABEL_FIRST,
+            }
         }),
         computed: {
             ...mapState(['feeds', 'err']),

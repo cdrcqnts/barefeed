@@ -23,7 +23,7 @@
             <v-list subheader two-line>
                 <!--                <RefreshFeeds></RefreshFeeds>-->
                 <DlgAdd></DlgAdd>
-                <v-subheader class=" grey--text text--darken-1">YOUR CHANNELS</v-subheader>
+                <v-subheader class=" grey--text text--darken-1">{{str.channels}}</v-subheader>
                 <v-list-tile :class="getActiveClass(idx, currIdx)"
                              :key="feed.title"
                              @click="currIdx = idx"
@@ -50,7 +50,7 @@
             <v-text-field
                     class="hidden-sm-and-down"
                     flat
-                    label="Search"
+                    label="Search this channel"
                     prepend-icon="search"
                     solo-inverted
                     v-model="search"
@@ -66,7 +66,7 @@
                             append-icon="search"
                             flat
                             hide-details
-                            label="Search this channel"
+                            :label="str.search"
                             single-line
                             v-model="search"
                     ></v-text-field>
@@ -96,7 +96,7 @@
                     </template>
                     <template v-slot:no-data>
                         <v-alert :value="true" color="error" icon="warning">
-                            Sorry, nothing to display here :(
+                            {{str.noData}}
                         </v-alert>
                     </template>
                 </v-data-table>
@@ -119,6 +119,7 @@
     import time from '@/aux/time'
     import filesize from '@/aux/filesize'
     import {mapActions, mapState} from 'vuex'
+    import {STR} from '@/aux/constants.js'
 
     export default {
         components: {
@@ -135,6 +136,11 @@
             loadingTbl: false,
             search: '',
             podcast: {},
+            str: {
+                search: STR.SEARCH,
+                noData: STR.NO_DATA,
+                channels: STR.CHANNELS,
+            },
             headers: [
                 {
                     text: 'Title',
