@@ -66,7 +66,7 @@
                             append-icon="search"
                             flat
                             hide-details
-                            label="Search"
+                            label="Search this channel"
                             single-line
                             v-model="search"
                     ></v-text-field>

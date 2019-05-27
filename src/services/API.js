@@ -4,3 +4,4 @@ export default () => {
         baseURL: `https://shielded-lake-94931.herokuapp.com/`
     })
 }
+// TODO avoid exposing URL on github
