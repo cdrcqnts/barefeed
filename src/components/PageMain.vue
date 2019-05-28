@@ -50,7 +50,7 @@
             <v-text-field
                     class="hidden-sm-and-down"
                     flat
-                    label="Search this channel"
+                    :label="str.search"
                     prepend-icon="search"
                     solo-inverted
                     v-model="search"

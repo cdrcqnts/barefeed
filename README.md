@@ -25,6 +25,8 @@ yarn serve
 - Export feeds to file for local backup
 - Import feeds from file to restore feeds
 - Feed avatar images
+- Feed Recommendation for keywords
+- Feed crawling fo given website
 
 #### License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/cdrcqnts/barefeed/blob/master/LICENSE) file for details.
