@@ -12,7 +12,6 @@
   <v-app v-else>
     <v-navigation-drawer app clipped fixed v-model="drawer">
       <v-list subheader two-line>
-        <!--                <RefreshFeeds></RefreshFeeds>-->
         <DlgAdd></DlgAdd>
         <v-subheader class="grey--text text--darken-1">{{str.channels}}</v-subheader>
         <v-list-tile
@@ -40,6 +39,7 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <span class="hidden-sm-and-down">{{ feeds[currIdx].title }}</span>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
       <v-text-field
         class="hidden-sm-and-down"
         flat
@@ -48,7 +48,7 @@
         solo-inverted
         v-model="search"
       ></v-text-field>
-      <v-spacer></v-spacer>
+      
       <DlgFeed :idx="currIdx"></DlgFeed>
       <DlgDelete :idx="currIdx"></DlgDelete>
     </v-toolbar>
@@ -76,19 +76,19 @@
           item-key="index"
         >
           <template v-slot:items="props">
-            <tr @click="selectPodcast(props.item)">
+            <tr @click="selectPodcast(props.item)" style="cursor:pointer">
               <td class="text-xs-left">{{ props.item.title }}</td>
               <td class="text-xs-right">{{ props.item.duration }}</td>
               <td class="text-xs-right">{{ size(props.item.size) }}</td>
               <td class="text-xs-right">{{ released(props.item.released) }}</td>
-              <td class="justify-center layout px-0">
+              <!-- <td class="justify-center layout px-0">
                 <v-btn @click="dialogPodcast(props.item)" icon>
                   <v-icon color="grey">info</v-icon>
                 </v-btn>
                 <v-btn :href="props.item.url" icon target="_blank">
                   <v-icon color="grey darken-2">get_app</v-icon>
                 </v-btn>
-              </td>
+              </td> -->
             </tr>
           </template>
           <template v-slot:no-data>
@@ -96,7 +96,6 @@
           </template>
         </v-data-table>
       </v-card>
-      <DlgPodcast :podcast="podcast"></DlgPodcast>
     </v-content>
     <Player :podcast="podcast" v-if="Object.keys(podcast).length > 0"></Player>
   </v-app>
@@ -106,7 +105,6 @@
 import DlgDelete from "./DlgDelete";
 import DlgFeed from "./DlgFeed";
 import DlgAdd from "./DlgAdd";
-import DlgPodcast from "./DlgPodcast";
 import Player from "./Player";
 
 import API_GET from "@/services/API_GET";
@@ -120,7 +118,6 @@ export default {
     DlgDelete,
     DlgFeed,
     DlgAdd,
-    DlgPodcast,
     Player
   },
   data: () => ({
@@ -158,12 +155,12 @@ export default {
         align: "right",
         value: "released"
       },
-      {
-        text: "Actions",
-        align: "center",
-        value: "title",
-        sortable: false
-      }
+      // {
+      //   text: "Actions",
+      //   align: "center",
+      //   value: "title",
+      //   sortable: false
+      // }
     ],
     pagination: {
       sortBy: "released",
@@ -197,7 +194,7 @@ export default {
   },
   computed: mapState(["feeds"]),
   methods: {
-    ...mapActions(["podcastDlgOn", "initFeeds", "setErr"]),
+    ...mapActions([ "initFeeds", "setErr"]),
     getActiveClass(idx1, idx2) {
       if (idx1 === idx2) {
         return "grey lighten-3";
@@ -225,10 +222,6 @@ export default {
     },
     size(n) {
       return filesize.formatBytes(n, 2);
-    },
-    dialogPodcast(podcast) {
-      this.podcast = Object.assign({}, podcast);
-      this.podcastDlgOn();
     },
     selectPodcast(podcast) {
       console.log(podcast);
