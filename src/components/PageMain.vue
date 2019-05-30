@@ -15,7 +15,7 @@
         <DlgAdd></DlgAdd>
         <v-subheader class="grey--text text--darken-1">{{str.channels}}</v-subheader>
         <v-list-tile
-          :class="getActiveClass(idx, currIdx)"
+          :class="highlightChannel(idx, currIdx)"
           :key="feed.title"
           @click="currIdx = idx"
           v-for="(feed, idx) in feeds"
@@ -48,7 +48,7 @@
         solo-inverted
         v-model="search"
       ></v-text-field>
-      
+
       <DlgFeed :idx="currIdx"></DlgFeed>
       <DlgDelete :idx="currIdx"></DlgDelete>
     </v-toolbar>
@@ -65,6 +65,7 @@
           ></v-text-field>
         </v-card-title>
         <v-data-table
+          :expand="false"
           :headers="headers"
           :items="feeds[currIdx].podcasts"
           :loading="loadingTbl"
@@ -73,31 +74,40 @@
           :rows-per-page-items="rowsPerPage"
           :search="search"
           class="elevation-1"
-          item-key="index"
+          item-key="pid"
         >
           <template v-slot:items="props">
-            <tr @click="selectPodcast(props.item)" style="cursor:pointer">
-              <td class="text-xs-left">{{ props.item.title }}</td>
+            <tr @click="props.expanded = !props.expanded;" style="cursor:pointer">
+              <td :class="highlightRow(props.expanded)">{{ props.item.title }}</td>
               <td class="text-xs-right">{{ props.item.duration }}</td>
               <td class="text-xs-right">{{ size(props.item.size) }}</td>
               <td class="text-xs-right">{{ released(props.item.released) }}</td>
-              <!-- <td class="justify-center layout px-0">
-                <v-btn @click="dialogPodcast(props.item)" icon>
-                  <v-icon color="grey">info</v-icon>
-                </v-btn>
-                <v-btn :href="props.item.url" icon target="_blank">
-                  <v-icon color="grey darken-2">get_app</v-icon>
-                </v-btn>
-              </td> -->
             </tr>
           </template>
-          <template v-slot:no-data>
-            <v-alert :value="true" color="error" icon="warning">{{str.noData}}</v-alert>
+          <template v-slot:expand="props">
+            <v-layout row>
+              <v-flex shrink pa-1>
+                <v-card flat>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-btn :href="props.item.url" class="mx-3" icon target="_blank" v-on="on">
+                        <v-icon size="24px">get_app</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Download</span>
+                  </v-tooltip>
+                </v-card>
+              </v-flex>
+              <v-flex grow pa-1>
+                <v-card flat>
+                  <v-card-text>{{ props.item.description }}</v-card-text>
+                </v-card>
+              </v-flex>
+            </v-layout>
           </template>
         </v-data-table>
       </v-card>
     </v-content>
-    <Player :podcast="podcast" v-if="Object.keys(podcast).length > 0"></Player>
   </v-app>
 </template>
 
@@ -105,7 +115,6 @@
 import DlgDelete from "./DlgDelete";
 import DlgFeed from "./DlgFeed";
 import DlgAdd from "./DlgAdd";
-import Player from "./Player";
 
 import API_GET from "@/services/API_GET";
 import time from "@/aux/time";
@@ -117,8 +126,7 @@ export default {
   components: {
     DlgDelete,
     DlgFeed,
-    DlgAdd,
-    Player
+    DlgAdd
   },
   data: () => ({
     drawer: null,
@@ -154,13 +162,7 @@ export default {
         text: "Released",
         align: "right",
         value: "released"
-      },
-      // {
-      //   text: "Actions",
-      //   align: "center",
-      //   value: "title",
-      //   sortable: false
-      // }
+      }
     ],
     pagination: {
       sortBy: "released",
@@ -194,11 +196,17 @@ export default {
   },
   computed: mapState(["feeds"]),
   methods: {
-    ...mapActions([ "initFeeds", "setErr"]),
-    getActiveClass(idx1, idx2) {
+    ...mapActions(["initFeeds", "setErr"]),
+    highlightChannel(idx1, idx2) {
       if (idx1 === idx2) {
         return "grey lighten-3";
       }
+    },
+    highlightRow(expanded) {
+      if (expanded) {
+        return "text-xs-left font-weight-bold";
+      }
+      return "text-xs-left";
     },
     async loadFeeds() {
       let noFeeds = this.feeds.length === 0;
@@ -222,10 +230,6 @@ export default {
     },
     size(n) {
       return filesize.formatBytes(n, 2);
-    },
-    selectPodcast(podcast) {
-      console.log(podcast);
-      this.podcast = Object.assign({}, podcast);
     }
   }
 };
