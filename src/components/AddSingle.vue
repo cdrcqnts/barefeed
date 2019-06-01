@@ -18,7 +18,7 @@
         @click="addNewFeed()"
         color="primary"
       >Add</v-btn>
-      <v-btn @click="closeDlg()" color="primary" flat>{{str.no}}</v-btn>
+      <v-btn @click="closeDlg()" color="primary" flat>Cancel</v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
   </v-card>
@@ -37,8 +37,6 @@ export default {
       str: {
         hintUrl: STR.URL_HINT,
         labelUrl: STR.URL_LABEL,
-        no: STR.BTN_ADD_NO,
-        yes: STR.BTN_ADD_YES,
         notURL: STR.ERR_NOT_URL
       }
     };

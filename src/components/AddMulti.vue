@@ -1,11 +1,7 @@
 <template>
   <v-card flat class="text-xs-center" justify-center>
     <br>
-    <p>
-      You can add multiple feeds by uploading a text file containing a list of valid feed URLs.
-      Each line must contain a feed URL. Existing feeds are ignored, valid new feeds are added. Download your current feeds to see the expected file structure.
-    </p>
-    <!-- <FileReader @load="addNewFeeds($event)"></FileReader> -->
+    <p>{{ str.description }}</p>
     <v-card-actions class="pb-4">
       <v-spacer></v-spacer>
       <input type="file" ref="file" style="display: none" hidden @change="loadURLsFromFile">
@@ -34,6 +30,7 @@ export default {
       loading: false,
       fname: "",
       str: {
+        description: STR.DESCR_ADD_MULTI,
         fileTooBig: STR.ERR_FILE_TOO_BIG,
         fileTooLong: STR.ERR_FILE_TOO_LONG,
         lineTooLong: STR.ERR_LINE_TOO_LONG,
@@ -50,6 +47,7 @@ export default {
       this.$emit("cancel", true);
     },
     loadURLsFromFile(ev) {
+      this.resetErr();
       const file = ev.target.files[0];
       const reader = new FileReader();
       this.fname = file.name;
@@ -96,7 +94,6 @@ export default {
         }
       }
       if (!this.err.length > 0) {
-        console.log(this.err);
         this.closeDlg();
       }
     }

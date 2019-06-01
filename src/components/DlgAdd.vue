@@ -6,7 +6,7 @@
           <v-icon color="grey darken-3">add_circle_outline</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title class="grey--text text--darken-3">{{ str.add }}</v-list-tile-title>
+          <v-list-tile-title class="grey--text text--darken-3">Add Feeds</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </template>
@@ -40,9 +40,7 @@
 // import FileReader from "./FileReader";
 import AddSingle from "./AddSingle";
 import AddMulti from "./AddMulti";
-import API_POST from "@/services/API_POST.js";
-import { STR } from "@/aux/constants.js";
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -53,9 +51,7 @@ export default {
   data: function() {
     return {
       show: false,
-      str: {
-        add: STR.BTN_ADD_FEED
-      }
+      str: {}
     };
   },
   methods: {
@@ -64,7 +60,6 @@ export default {
       if (b) {
         this.show = false;
         this.loading = false;
-        this.resetErr();
       }
     }
   }
