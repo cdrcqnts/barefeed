@@ -1,6 +1,6 @@
 export const STR = Object.freeze({
     PAGE_TITLE: "Barefeed",
-    PAGE_SUBTITLE: "A simple slot-based feed reader.",
+    PAGE_SUBTITLE: "A simple feed reader for podcasts. No registration. No cookies.",
     URL_HINT: "For example: https://rss.art19.com/masters-of-scale",
     URL_LABEL: "Enter feed URL",
     URL_LABEL_FIRST: "Enter your first feed URL",
