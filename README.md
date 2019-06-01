@@ -1,5 +1,5 @@
 # Barefeed
-A most simple feed reader web app for podcasts. No registration. No cookies.
+A simple feed reader web app for podcasts. No registration. No cookies.
 
 This is the frontend application using Vue.js.
 For the corresponding REST API, see [this repository](https://github.com/cdrcqnts/barefeed-rest).
