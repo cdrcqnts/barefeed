@@ -4,7 +4,7 @@
       <v-icon color="grey darken-3">import_export</v-icon>
     </v-list-tile-action>
     <v-list-tile-content>
-      <v-list-tile-title class="grey--text text--darken-3">Export Channels</v-list-tile-title>
+      <v-list-tile-title class="grey--text text--darken-3">Export Feeds</v-list-tile-title>
     </v-list-tile-content>
   </v-list-tile>
 </template>

@@ -4,7 +4,7 @@ export const STR = Object.freeze({
     URL_HINT: "For example: https://rss.art19.com/masters-of-scale",
     URL_LABEL: "Enter feed URL",
     URL_LABEL_FIRST: "Enter your first feed URL",
-    BTN_ADD_FEED: "Add Feed",
+    BTN_ADD_FEED: "Add Feeds",
     BTN_ADD_YES: "Save",
     BTN_ADD_NO: "Cancel",
     BTN_DELETE_NO: "No, keep",
