@@ -192,7 +192,7 @@ export default {
         if (deleting) {
           this.currIdx = 0;
           if (lastFeed) {
-            this.$router.push({ name: "firstFeed" });
+            this.$router.push({ name: "pageFirst" });
           }
         }
       }

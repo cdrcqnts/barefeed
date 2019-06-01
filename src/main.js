@@ -13,8 +13,8 @@ import {
     Ripple
 } from 'vuetify/lib/directives'
 
-import FirstFeed from './components/PageFirst.vue'
-import NotFirstFeed from './components/PageMain.vue'
+import PageFirst from './components/PageFirst.vue'
+import PageMain from './components/PageMain.vue'
 
 
 Vue.use(VueRouter);
@@ -27,13 +27,13 @@ Vue.use(Vuetify, {
 Vue.use(UploadButton);
 
 const routes = [{
-    name: 'firstFeed',
+    name: 'pageFirst',
     path: '/',
-    component: FirstFeed,
+    component: PageFirst,
 }, {
-    name: 'notFirstFeed',
+    name: 'pageMain',
     path: '/:sid',
-    component: NotFirstFeed,
+    component: PageMain,
     // beforeEnter: (to, from, next) => {
     //     loadFeeds(to, from, next)
     // },
