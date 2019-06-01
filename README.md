@@ -22,10 +22,6 @@ yarn serve
 ```
 
 ### TODO
-- Export feeds to file for local backup
-- Import feeds from file to restore feeds
-- (Feed Recommendation for keywords)
-- Actions: Explicit Download and Play
 - Button Tooltips
 - Feed crawling fo given domain
 
