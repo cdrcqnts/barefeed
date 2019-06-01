@@ -6,9 +6,12 @@ import store from './store'
 
 
 import App from './App.vue'
-
+import UploadButton from 'vuetify-upload-button'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import {
+    Ripple
+} from 'vuetify/lib/directives'
 
 import FirstFeed from './components/PageFirst.vue'
 import NotFirstFeed from './components/PageMain.vue'
@@ -16,8 +19,12 @@ import NotFirstFeed from './components/PageMain.vue'
 
 Vue.use(VueRouter);
 Vue.use(Vuetify, {
-    iconfont: 'md'
+    iconfont: 'md',
+    directives: {
+        Ripple
+    }
 });
+Vue.use(UploadButton);
 
 const routes = [{
     name: 'firstFeed',
@@ -30,8 +37,7 @@ const routes = [{
     // beforeEnter: (to, from, next) => {
     //     loadFeeds(to, from, next)
     // },
-}
-];
+}];
 
 const router = new VueRouter({
     mode: 'history',
@@ -46,5 +52,3 @@ new Vue({
     store,
     render: h => h(App),
 }).$mount('#app');
-
-

@@ -11,8 +11,15 @@
   </v-app>
   <v-app v-else>
     <v-navigation-drawer app clipped fixed v-model="drawer">
-      <v-list subheader two-line>
+      <!-- <div>
+        <input type="file" ref="file" style="display: none">
+        <button @click="$refs.file.click()">open file dialog</button>
+      </div>-->
+      <v-list dense>
+        <ExpChannels></ExpChannels>
         <DlgAdd></DlgAdd>
+      </v-list>
+      <v-list dense subheader two-line>
         <v-subheader class="grey--text text--darken-1">{{str.channels}}</v-subheader>
         <v-list-tile
           :class="highlightChannel(idx, currIdx)"
@@ -112,6 +119,7 @@
 </template>
 
 <script>
+import ExpChannels from "./ExpChannels";
 import DlgDelete from "./DlgDelete";
 import DlgFeed from "./DlgFeed";
 import DlgAdd from "./DlgAdd";
@@ -124,6 +132,7 @@ import { STR } from "@/aux/constants.js";
 
 export default {
   components: {
+    ExpChannels,
     DlgDelete,
     DlgFeed,
     DlgAdd

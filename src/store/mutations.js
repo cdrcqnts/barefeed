@@ -11,10 +11,10 @@ export const mutations = {
         state.feeds.splice(index, 1)
     },
     [types.SET_ERR](state, payload) {
-        state.err = payload
+        state.err.push(payload)
     },
     [types.RESET_ERR](state) {
-        state.err = ""
+        state.err = []
     },
     [types.PODCAST_DLG_ON](state) {
         state.podcastDlg = true

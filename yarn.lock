@@ -3418,6 +3418,11 @@ file-loader@^3.0.1:
     loader-utils "^1.0.2"
     schema-utils "^1.0.0"
 
+file-saver@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.2.tgz#06d6e728a9ea2df2cce2f8d9e84dfcdc338ec17a"
+  integrity sha512-Wz3c3XQ5xroCxd1G8b7yL0Ehkf0TC9oYC6buPFkNnU9EnaPlifeAFCyCh+iewXTyFRcg0a6j3J7FmJsIhlhBdw==
+
 filesize@^3.6.1:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/filesize/-/filesize-3.6.1.tgz#090bb3ee01b6f801a8a8be99d31710b3422bb317"
@@ -7919,6 +7924,11 @@ vuetify-loader@^1.0.5:
   integrity sha512-j6KWPuwQ4xTxPDksbFwbSJle7+3oSjNvJ/CViTEgbPLFPqnNsR8JUtRldURIQ0cmAmr0/CoLSZkj0B8JKqOBMA==
   dependencies:
     loader-utils "^1.1.0"
+
+vuetify-upload-button@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vuetify-upload-button/-/vuetify-upload-button-2.0.0.tgz#42ef6bfdf6e97e704daccd2819d9624689ceb831"
+  integrity sha512-RqN7LRreF897xSMaBqQieTs+RmuJUrBFH8StMroc5s4xVW5Hbjh8zn2baKd1iidkaad4bLEGgPagyO/mnXdZrA==
 
 vuetify@^1.5.14:
   version "1.5.14"

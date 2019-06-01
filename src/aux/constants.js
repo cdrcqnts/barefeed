@@ -14,4 +14,8 @@ export const STR = Object.freeze({
     SEARCH: "Search this channel",
     NO_DATA: "Sorry, nothing to display here :(",
     CHANNELS: "Your Channels",
+    ERR_FILE_TOO_BIG: "File size must be under 512 KB.",
+    ERR_FILE_TOO_LONG: "Can not load more than 30 Lines.",
+    ERR_LINE_TOO_LONG: "A line must not contain more than 2000 characters. Line is too long.",
+    ERR_NOT_URL: "Invalid URL."
 });

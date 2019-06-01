@@ -12,4 +12,7 @@ export default {
     sortByUpdated(feeds) {
         return feeds.sort((a, b) => (moment(a.updated) < moment(b.updated)) ? 1 : -1)
     },
+    now() {
+        return moment();
+    }
 }
