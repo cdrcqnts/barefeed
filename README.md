@@ -4,6 +4,9 @@ A simple feed reader web app for podcasts. No registration. No cookies.
 This is the frontend application using Vue.js.
 For the corresponding REST API, see [this repository](https://github.com/cdrcqnts/barefeed-rest).
 
+### Demo
+For a working demo [GO HERE](https://musing-borg-502f37.netlify.com/).
+
 ### How it works
 A random unique key is generated when the user adds a feed.
 The key is mapped as a parameter to the url. All further feeds added by the user are linked with the same key.
