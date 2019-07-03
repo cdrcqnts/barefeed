@@ -8,13 +8,13 @@ export default {
             ep = 'feeds'
         }
         return API().post(ep, {
-            url: url
-        }).then(res => {
-            return {
-                "ok": true,
-                "data": res.data.success
-            }
-        })
+                url: url
+            }).then(res => {
+                return {
+                    "ok": true,
+                    "data": res.data.success
+                }
+            })
             .catch(err => {
                 return {
                     "ok": false,

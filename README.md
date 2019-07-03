@@ -5,7 +5,7 @@ This is the frontend application using Vue.js.
 For the corresponding REST API, see [this repository](https://github.com/cdrcqnts/barefeed-rest).
 
 ### Demo
-For a working demo [GO HERE](https://musing-borg-502f37.netlify.com/).
+For a working demo [CLICK HERE](https://musing-borg-502f37.netlify.com/).
 
 ### How it works
 A random unique key is generated when the user adds a feed.
